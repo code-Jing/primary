@@ -1,0 +1,5 @@
+ this.jsts = require('jsts');
+                let geoJSONReader = new this.jsts.io.GeoJSONReader();
+                this.geoJsts = geoJSONReader.read(geoJSONGeomStr);
+                //º∆À„ª∫≥Â
+                let bufferGeo = this.geoJsts.buffer(this.widthNum)
