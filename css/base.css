@@ -6,6 +6,7 @@ div {
   width: 10px;
   overflow: hidden;
 }
-p{
-  font-size: 150%;
+p:hover{
+  /* font-size: 150%; */
+  color: red;
 }
