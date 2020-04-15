@@ -34,3 +34,18 @@ outline:none;
 
 2.a标签的tabindex属性设为-1
 
+
+
+
+
+
+
+修改img大小
+
+```css
+.img {
+  background-image: url(../img/touxiang.jpg);
+  background-size: 400px 400px;
+}
+```
+

@@ -4,6 +4,56 @@
 
 # 一、代码风格
 
+### 1.嵌套层级
+
+- for循环嵌套条件语句
+
+```javascript
+//例子一
+for (let i = 0; i < 10; i++) {
+  if (cond) {
+    ... // <- 又一层嵌套
+  }
+} 
+//修改
+for (let i = 0; i < 10; i++) {
+  if (!cond) continue;
+  ...  // <- 没有额外的嵌套
+}
+  
+//例子二
+function pow(x, n) {
+  if (n < 0) {
+    alert("Negative 'n' not supported");
+  } else {
+    let result = 1;
+
+    for (let i = 0; i < n; i++) {
+      result *= x;
+    }
+
+    return result;
+  }
+}
+//修改
+function pow(x, n) {
+  if (n < 0) {
+    alert("Negative 'n' not supported");
+    return;
+  }
+
+  let result = 1;
+
+  for (let i = 0; i < n; i++) {
+    result *= x;
+  }
+
+  return result;
+}
+```
+
+
+
 # 二、javaScript基础知识自我总结
 
 ### 1.continue和break
@@ -285,6 +335,160 @@ sayHi(); // Hello    //     这里也能运行（为什么不行呢）
   alert( user[key] ); // John（如果输入 "name"）
   ```
 
-### 2.属性存在性测试，“in” 操作符
+### 2.属性存在性测试与“in” 操作符
 
-- 
+- 基础方法：对象的一个显著的特点就是其所有的属性都是可访问的。如果某个属性不存在也不会报错！访问一个不存在的属性只是会返回 `undefined`。这提供了一种普遍的用于检查属性是否存在的方法 —— 获取值来与 undefined 比较：
+
+  ```javascript
+  let user = {};
+  
+  alert( user.noSuchProperty === undefined ); // true 意思是没有这个属性
+  ```
+
+- in操作符
+
+  - 语法：`"key" in object`
+
+  - ```javascript
+    let user = { name: "John", age: 30 };
+    
+    alert( "age" in user ); // true，user.age 存在
+    alert( "blabla" in user ); // false，user.blabla 不存在。
+    ```
+
+  - 注意：`in` 的左边必须是 **属性名**。通常是一个带引号的字符串。
+
+    如果我们省略引号，则意味着将测试包含实际名称的变量。（类似于vue中的冒号绑定）
+
+    ```javascript
+    let user = { age: 30 };
+    
+    let key = "age";
+    alert( key in user ); // true，从 key 获取属性名并检查这个属性
+    ```
+
+  - 通常，检查属性是否存在时，使用严格比较 `"=== undefined"` 就够了。但在一种特殊情况下，这种方式会失败，而 `"in"` 却可以正常工作。
+
+    那就是属性存在，但是存储值为 `undefined`：
+
+    ```javascript
+    let obj = {
+      test: undefined
+    };
+    
+    alert( obj.test ); // 显示 undefined，所以属性不存在？
+    
+    alert( "test" in obj ); // true，属性存在！
+    ```
+
+### 3.“for…in” 循环
+
+### 4.复制和合并，Object.assign
+
+- 复制一个对象变量会创建指向此对象的另一个引用。
+
+  那如果我们需要复制一个对象呢？创建一份独立的拷贝，一份克隆？
+
+  这也是可行的，但是有一点麻烦，因为 JavaScript 中没有支持这种操作的内置函数。实际上，我们很少这么做。在大多数时候，复制引用都很好用。
+
+  但如果我们真想这么做，就需要创建一个新的对象，然后遍历现有对象的属性，在原始级别的状态下复制给新的对象。
+
+  像这样:
+
+  ```javascript
+  let user = {
+    name: "John",
+    age: 30
+  };
+  
+  let clone = {}; // 新的空对象
+  
+  // 复制所有的属性值
+  for (let key in user) {
+    clone[key] = user[key];
+  }
+  
+  // 现在的复制是独立的了
+  clone.name = "Pete"; // 改变它的值
+  
+  alert( user.name ); // 原对象属性值不变
+  ```
+
+- 用 [Object.assign](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) 来实现
+
+  - 语法：Object.assign(dest,[ src1, src2, src3...])
+
+  - 参数 `dest` 和 `src1, ..., srcN`（你需要多少就可以设置多少，没有限制）是对象。
+
+  - 这个方法将 `src1, ..., srcN` 这些所有的对象复制到 `dest`。换句话说，从第二个参数开始，所有对象的属性都复制给了第一个参数对象，然后返回 `dest`。
+
+    ```javascript
+    let user = { name: "John" };
+    
+    let permissions1 = { canView: true };
+    let permissions2 = { canEdit: true };
+    
+    // 把 permissions1 和 permissions2 的所有属性都拷贝给 user
+    Object.assign(user, permissions1, permissions2);
+    
+    // 现在 user = { name: "John", canView: true, canEdit: true }
+    ```
+
+  - 如果用于接收的对象（`user`）已经有了同样属性名的属性，已有的则会被覆盖：
+
+    ```javascript
+    let user = { name: "John" };
+    
+    // 覆盖 name，增加 isAdmin
+    Object.assign(user, { name: "Pete", isAdmin: true });
+    
+    // 现在 user = { name: "Pete", isAdmin: true }
+    ```
+
+  - 我们可以用 `Object.assign` 来替代循环赋值进行简单的克隆操作：
+
+    ```javascript
+    let user = {
+      name: "John",
+      age: 30
+    };
+    
+    let clone = Object.assign({}, user);
+    ```
+
+### 5.检查空对象
+
+- 写一个 `isEmpty(obj)` 函数，当对象没有属性的时候返回 `true`，否则返回 `false`。
+
+  ```javascript
+  let schedule = {};
+  
+  alert( isEmpty(schedule) ); // true
+  
+  schedule["8:30"] = "get up";
+  
+  alert( isEmpty(schedule) ); // false
+  ```
+
+  
+
+### 6.总结
+
+- 删除属性：`delete obj.prop`。
+
+- 检查是否存在给定键的属性：`"key" in obj`。
+
+- 遍历对象：`for(let key in obj)` 循环。
+
+- 其他：对象是通过引用被赋值或复制的。换句话说，变量存储的不是“对象的值”，而是值的“引用”（内存地址）。所以复制这样的变量或者将其作为函数参数进行传递时，复制的是引用，而不是对象。基于复制的引用（例如添加/删除属性）执行的所有的操作，都是在同一个对象上执行的。
+
+  我们可以使用 `Object.assign` 或者 [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) 进行“真正的复制”（一个克隆）。
+
+  我们在这一章学习的叫做“基本对象”，或者就叫对象。
+
+  JavaScript 中还有很多其他类型的对象：
+
+  - `Array` 用于存储有序数据集合，
+  - `Date` 用于存储时间日期，
+  - `Error` 用于存储错误信息。
+  - ……等等。

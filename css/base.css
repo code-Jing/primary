@@ -1,12 +1,13 @@
-body{
-  font-size: small;
+body {
+  font-size: medium;
 }
-div {
-  height: 10px;
-  width: 10px;
-  overflow: hidden;
+
+.img {
+  width: 1000px;
+  height: 1000px;
+  background-image: url(../img/touxiang.jpg);
+  background-size: 400px 400px;
 }
-p:hover{
-  /* font-size: 150%; */
-  color: red;
+img {
+  background-size: 400px 400px;
 }
