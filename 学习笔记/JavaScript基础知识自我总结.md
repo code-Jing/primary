@@ -1,4 +1,10 @@
-# 一、javaScript基础知识自我总结
+
+
+
+
+# 一、代码风格
+
+# 二、javaScript基础知识自我总结
 
 ### 1.continue和break
 
@@ -45,8 +51,9 @@ let result = confirm("yes or no"); //返回值为true/false
 ### 3.数据类型转换
 
 1. 字符串转换 
-   - 转换发生在输出内容的时候，也可以通过 String(value) 进行显式转换。
-
+   
+- 转换发生在输出内容的时候，也可以通过 String(value) 进行显式转换。
+   
 2. 数字型转换
 
    - 转换发生在进行算术操作时，也可以通过 Number(value) 进行显式转换。
@@ -179,7 +186,7 @@ a = "jing" - 5;
 console.log("test4", a); // NaN
 ```
 
-# 二、函数
+# 三、函数
 
 ### 1.默认参数
 
@@ -249,3 +256,35 @@ sayHi(); // Hello    //     这里也能运行（为什么不行呢）
 (3)现在函数可以通过 `sayHi()` 和 `func()` 两种方式进行调用。
 
 ### 4.
+
+# 四、对象
+
+### 1. 方括号
+
+- 基础使用
+
+  ```javascript
+  let user = {
+    name: "John",
+    age: 30,
+  };
+  user.name === user['name']//true
+  ```
+
+- 进阶使用
+
+  ```javascript
+  let user = {
+    name: "John",
+    age: 30
+  };
+  
+  let key = prompt("What do you want to know about the user?", "name");
+  
+  // 访问变量
+  alert( user[key] ); // John（如果输入 "name"）
+  ```
+
+### 2.属性存在性测试，“in” 操作符
+
+- 
