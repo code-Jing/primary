@@ -56,7 +56,9 @@ function pow(x, n) {
 
 # 二、javaScript基础知识自我总结
 
-### 1.continue和break
+### 1. continue和break
+
+- 这两个都是用于跳出循环的，return跳出的是函数
 
 - continue：跳出本次循环，不再执行下面的代码，直接开始下一个循环
 - break：直接结束循环
@@ -71,7 +73,7 @@ for (let i = 0; i < 10; i++) {
 
 
 
-### 2.alert,prompt,confirm（返回值的问题）
+### 2. alert,prompt,confirm（返回值的问题）
 
 - confirm：返回值为true/false
 
@@ -98,12 +100,12 @@ let result = confirm("yes or no"); //返回值为true/false
 
 - 注意：模态窗口的确切位置由浏览器决定。通常在页面中心。窗口的确切外观也取决于浏览器。我们不能修改它。
 
-### 3.数据类型转换
+### 3. 数据类型转换
 
 1. 字符串转换 
    
 - 转换发生在输出内容的时候，也可以通过 String(value) 进行显式转换。
-   
+  
 2. 数字型转换
 
    - 转换发生在进行算术操作时，也可以通过 Number(value) 进行显式转换。
@@ -174,7 +176,7 @@ let result = confirm("yes or no"); //返回值为true/false
    */
   ```
 
-### 5.运算符
+### 5. 运算符
 
 1. +号用于两个字符串
 
@@ -210,7 +212,7 @@ let result = confirm("yes or no"); //返回值为true/false
   console.log(typeof a, a);//number 23424
   ```
 
-### 3.自增运算符
+### 3. 自增运算符
 
 ```javascript
 let a = 0;
@@ -219,7 +221,7 @@ console.log(a); //1
 console.log(b); //0
 ```
 
-### 4.减法只能做数学运算
+### 4. 减法只能做数学运算
 
 ```javascript
 let a;
@@ -238,7 +240,7 @@ console.log("test4", a); // NaN
 
 # 三、函数
 
-### 1.默认参数
+### 1. 默认参数
 
 - 方式一：直接给默认值
 
@@ -286,7 +288,7 @@ console.log("test4", a); // NaN
   alert( doNothing() === undefined ); // true
   ```
 
-### 3.函数表达式(函数后有没有括号含义完全不同)
+### 3. 函数表达式(函数后有没有括号含义完全不同)
 
 ```javascript
 function sayHi() {   // (1) 创建
@@ -335,7 +337,7 @@ sayHi(); // Hello    //     这里也能运行（为什么不行呢）
   alert( user[key] ); // John（如果输入 "name"）
   ```
 
-### 2.属性存在性测试与“in” 操作符
+### 2. 属性存在性测试与“in” 操作符
 
 - 基础方法：对象的一个显著的特点就是其所有的属性都是可访问的。如果某个属性不存在也不会报错！访问一个不存在的属性只是会返回 `undefined`。这提供了一种普遍的用于检查属性是否存在的方法 —— 获取值来与 undefined 比较：
 
@@ -381,9 +383,9 @@ sayHi(); // Hello    //     这里也能运行（为什么不行呢）
     alert( "test" in obj ); // true，属性存在！
     ```
 
-### 3.“for…in” 循环
+### 3. “for…in” 循环
 
-### 4.复制和合并，Object.assign
+### 4. 复制和合并，Object.assign
 
 - 复制一个对象变量会创建指向此对象的另一个引用。
 
@@ -456,7 +458,7 @@ sayHi(); // Hello    //     这里也能运行（为什么不行呢）
     let clone = Object.assign({}, user);
     ```
 
-### 5.检查空对象
+### 5. 检查空对象
 
 - 写一个 `isEmpty(obj)` 函数，当对象没有属性的时候返回 `true`，否则返回 `false`。
 
@@ -472,7 +474,7 @@ sayHi(); // Hello    //     这里也能运行（为什么不行呢）
 
   
 
-### 6.总结
+### 6. 总结
 
 - 删除属性：`delete obj.prop`。
 

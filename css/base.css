@@ -1,5 +1,5 @@
 body {
-  font-size: medium;
+  font: 20px/1.5 "微软雅黑";
 }
 
 .img {
@@ -7,7 +7,11 @@ body {
   height: 1000px;
   background-image: url(../img/touxiang.jpg);
   background-size: 400px 400px;
+  background-repeat: no-repeat;
 }
 img {
-  background-size: 400px 400px;
+  background-size: 400px 400px !important;
+}
+a:hover {
+  color: red;
 }
